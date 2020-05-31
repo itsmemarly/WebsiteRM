@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>RM - Royalty Music </title>
+  <title> About RM Artists </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Insert Bootstrap -->
-    <?php
+   <!-- Insert Bootstrap -->
+   <?php
     include("Includes/bootstrap.php");
     ?>
-
+    
     <!-- Own styling/ scripts -->
     <link rel="stylesheet" href="Styles/standard.css">
 </head>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>RM - Royalty Music </title>
+  <title> About Royalty Music </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Insert Bootstrap -->
-    <?php
+     <!-- Insert Bootstrap -->
+     <?php
     include("Includes/bootstrap.php");
     ?>
 
