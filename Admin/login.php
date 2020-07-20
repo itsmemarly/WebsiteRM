@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once "config.php";
+require_once "../Form/connect.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = :username";
+        $sql = "SELECT id, username, password, role FROM users WHERE username = :username";
         
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -52,6 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $id = $row["id"];
                         $username = $row["username"];
                         $hashed_password = $row["password"];
+                        $_SESSION['role'] = $row["role"];
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
@@ -59,10 +60,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;    
+                            $_SESSION['role'] = $row['role'];                        
                             
-                            // Redirect user to welcome page
-                            header("location: dashboard.php");
+
+                            if ($_SESSION['role'] === 'artist')  {
+                                header ("location: artistDashboard.php");
+                                exit;
+                              }elseif ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'marleen')  {
+                                header ("location: adminDashboard.php");
+                                exit;
+                              }
+                               else {
+                         header("Location: dashboard.php");
+                               }
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
@@ -85,38 +96,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     unset($pdo);
 }
 ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?php 
+    <meta charset="UTF-8">
+    <title>Login</title>
+   
+    <style type="text/css">
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 350px; padding: 20px; }
+    </style>
+
+<body>
+<?php 
   include("../Includes/bootstrap.php");
   ?>
 </head>
 <body>
 <?php
-include("../Includes/basicAdminNavbar.php");
+include("../Includes/StandardNavbar.php");
 ?>
-
-<div class="container">
-  <h2>Login</h2>
-  <form action="/action_page.php">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>    
+            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+                <span class="help-block"><?php echo $password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
     </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-    </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-</div>
-
 </body>
 </html>

@@ -26,12 +26,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
 <?php
-include("../../Includes/AdminNewProducts.php");
+include("../../Includes/AdminNewArtist.php");
 ?>
 
 <div class="container">
 <?php 
-include("./phpFiles/ProductLister.php");
+include("./phpFiles/artistsList.php");
 ?>
 </div>
 

@@ -1,4 +1,5 @@
 <?php
+
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 define('DB_SERVER', 'localhost');
@@ -17,5 +18,12 @@ try{
     die("ERROR: Could not connect. " . $e->getMessage());
 }
 
+    //Sending form data to sql db.
 
+mysqli_query($link,"INSERT INTO demos (demoLink, demoArtist)
+VALUES ('$_POST[name]', '$_POST[yt]')");
+
+header('Location: ./../artistLists.php');
+exit; // avoid further execution of code, if any resides below that
+    
 ?>

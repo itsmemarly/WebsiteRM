@@ -1,18 +1,13 @@
+
 <?php 
 session_start();
+echo $_SESSION['role'];
 
-echo  "Your current role is: " . $_SESSION["role"] . ".<br>";
-
-if ($_SESSION['role'] === 'artist')  {
-  header ("location: artistDashboard.php");
+if ($_SESSION['role'] !== 'admin')  {
+  header ("location: dashboard.php");
   exit;
-}elseif ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'marleen')  {
-  header ("location: adminDashboard.php");
-  exit;
-}
- else {
-  ?>
-
+} else {
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +20,6 @@ if ($_SESSION['role'] === 'artist')  {
    <?php
     include("../Includes/bootstrap.php");
     include("../Form/connect.php");
-  
     ?>
     
     <!-- Own styling/ scripts -->
@@ -34,19 +28,21 @@ if ($_SESSION['role'] === 'artist')  {
 <body>
 
 <?php
-include("../Includes/UserNavbar.php");
+include("../Includes/AdminNavbar.php");
 ?>
+
+
   
 <div class="container text-center">    
   <h3>These are our amazing artists:</h3><br>
   <div class="row">
   
 <?php $results = mysqli_query($link, "SELECT * FROM artists"); ?>
-<?php while ($row = mysqli_fetch_array($results)) { 
+<?php while ($rows = mysqli_fetch_array($results)) { 
 
-$image = $row['artistImage'];
-$name = $row['artistName'];
-$channel = $row['artistChannel'];
+$image = $rows['artistImage'];
+$name = $rows['artistName'];
+$channel = $rows['artistChannel'];
 
 
 ?>
@@ -55,7 +51,7 @@ $channel = $row['artistChannel'];
    <div class="imgframe" >
       <img src="Artists/phpFiles/Artist/<?php echo $image; ?>" alt="<?php echo $name; ?>" id="imgcover" height="140" width="140">
       </div>
-   
+
      <p><?php echo $name; ?></p>
      <a href="<?php echo $channel; ?>" target="_blank" rel="noopener noreferrer">View Channel</a>
    
