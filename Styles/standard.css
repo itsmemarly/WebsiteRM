@@ -28,3 +28,10 @@ footer {
         display: none;
     }
 }
+
+.shopping {
+    border: 2.5px solid black;
+    background-color: lightgrey;
+    transition: ease-in-out;
+    margin-top: 20px;
+}

@@ -1,7 +1,7 @@
 
 <?php 
 session_start();
-echo $_SESSION['role'];
+// echo $_SESSION['role'];
 
 if ($_SESSION['role'] !== 'artist')  {
   header ("location: dashboard.php");

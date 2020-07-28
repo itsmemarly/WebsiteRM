@@ -9,6 +9,6 @@ $id = $_GET['id'];
 $result = mysqli_query($link, "DELETE FROM products WHERE id=$id");
  
 //redirecting to the display page (index.php in our case)
-header("Location:productList.php");
+header("Location:orderlist.php");
 
 ?>

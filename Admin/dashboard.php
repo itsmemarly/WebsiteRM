@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-echo  "Your current role is: " . $_SESSION["role"] . ".<br>";
+// echo  "Your current role is: " . $_SESSION["role"] . ".<br>";
 
 if ($_SESSION['role'] === 'artist')  {
   header ("location: artistDashboard.php");

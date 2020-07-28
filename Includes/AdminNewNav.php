@@ -15,6 +15,7 @@
         <li><a href="../Products/productList.php">Manage products</a></li>
         <li><a href="Slider/sliderList.php">Manage slides</a></li>
         <li><a href="../Artists/artistLists.php">Manage artists</a></li>
+        <li><a href="../Products/orderlist.php">Manage Orders</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="../logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>

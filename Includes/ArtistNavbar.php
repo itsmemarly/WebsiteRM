@@ -13,6 +13,7 @@
         <li class="active"><a href="../index.php">Home</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
         <li><a href="ArtistPages/demos.php">Demo requests</a></li>
+        <li><a href="ArtistPages/shop.php">RM Merch</a></li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">

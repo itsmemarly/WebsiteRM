@@ -17,6 +17,7 @@
 
 <?php
 include("Includes/StandardNavbar.php");
+include("Form/connect.php");
 ?>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
